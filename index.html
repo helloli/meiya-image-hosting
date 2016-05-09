@@ -1,23 +1,27 @@
 <!DOCTYPE html>
+<head>
 <meta charset="UTF-8">
-
 <style>
-img{
-	max-width:80%;
-	display:block;
-}
+	img{
+		max-width:80%;
+		display:block;
+	}
 </style>
-
-<input type="file" multiple="true" id="uploads">
-<div id="pictures"></div>
-<img id="pics">
-<p id="info"></p>
-<p id="progress"></p>
+</head>
+<body>
+	<input type="file" multiple="true" id="uploads">
+	<div id="pictures"></div>
+	<img id="pics">
+	<p id="info"></p>
+	<p id="progress"></p>
+</body>
 
 <script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.lazyload.min.js"></script>
 <script src="up.itorr.js"></script>
 
 <script>
+$('img').lazyload();
 $('#uploads').change(function(){
 	if(!this.files||!this.files[0]) {
 		return alert('选取文件出错！');
