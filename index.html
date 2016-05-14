@@ -2,69 +2,105 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-<link rel="stylesheet" href="layout.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/layout.css">
 </head>
 <body>
-	<!-- 布局部分 -->
-	<!-- header -->
-	<div class="jumbotron">
-	   	<div class="container">
-	      	<h1>欢迎来到美丫图床~</h1>
-	      	<p>美丫图床为大家带来各种炫酷的表情哦</p>
-	      	<!-- <p><a class="btn btn-primary btn-lg" role="button">广告君的地盘</a></p> -->
-	   	</div>
+<!-- 布局部分 -->
+<!-- header -->
+<div class="jumbotron">
+	<div class="container">
+		<h1>欢迎来到美丫图床</h1>
+		<p>美丫图床为大家带来各种炫酷的表情哦</p>
+		<!-- <p><a class="btn btn-primary btn-lg" role="button">广告君的地盘</a></p> -->
 	</div>
+</div>
+<div class="wrap">
+	<div id="main"></div>
+</div>
 
-	<input type="file" multiple="true" id="uploads">
-	<div id="pictures"></div>
-	<img id="pics">
-	<p id="info"></p>
-	<p id="progress"></p>
+<input type="file" multiple="true" id="uploads">
+<div id="pictures"></div>
+<img id="pics">
+<p id="info"></p>
+<p id="progress"></p>
 
-	<!-- js代码部分 -->
-	<script src="jquery.min.js"></script>
-	<script src="jquery.lazyload.min.js"></script>
-	<script src="bootstrap.min.js"></script>
-	<script src="up.itorr.js"></script>
-	<script>
-		$('img').lazyload();
-		$('#uploads').change(function(){
-			if (!this.files||!this.files[0]) {
-				return alert('选取文件出错！');
+<!-- js代码部分 -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.lazyload.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/up.itorr.js"></script>
+<script src="js/waterfall.js"></script>
+<script>
+$(function () {
+	$.ajax({
+		type: 'GET',
+		url: 'admin/getPics.php',
+		dataType: 'json',
+		success: function (json) {
+			if(json.status) {
+				var content = '';
+				json.data.forEach(function (obj) {
+					content += '<div class="box" id="'
+					+ obj.id +'"><div class="pic"><img src="http://ww2.sinaimg.cn/large/'
+					+ obj.pid
+					+ '" /></div></div>'
+				});
+				// console.log(content);
+				$('#main').html(content);
+				waterfall('main', 'box');
+			} else {
+				alert(json.msg);
+			}
+		}
+	});
+	$('img').lazyload();
+	$('#uploads').change(function () {
+		if (!this.files || !this.files[0]) {
+			return alert('选取文件出错！');
+		}
+
+		for (var i = 0, len = this.files.length; i < len; i ++) {
+			var node = '<div class="box" id="box'
+			+ i + '"><div class="pic" id="progress'
+			+ i + '">0%</div></div>';
+			$('#main').prepend(node);
+		}
+
+		for (var i = 0, len = this.files.length; i < len; i ++) {
+			// console.log(len, 'len');
+			// console.log(i, 'i');
+			var picfile = this.files[i];
+
+			if (picfile.type.indexOf('image') != 0) {
+				return alert('这不是一个图像呀！');
 			}
 
-			for (var i = 0, len = this.files.length; i < len; i ++) {
-				console.log(len);
-				var picfile = this.files[i];
-
-				if (picfile.type.indexOf('image') != 0) {
-					return alert('这不是一个图像呀！');
-				}
-				
-				UP(picfile, function (pid) {
-					$('#pictures')[0].innerHTML += '<img src="' + 'http://ww2.sinaimg.cn/large/' + pid +'">';
-					$('#info')[0].innerHTML += 'http://ww2.sinaimg.cn/large/' + pid + '<br />';
-					// $('#info')[0].innerHTML=$('#pics')[0].src='http://ww2.sinaimg.cn/large/'+pid;
-					var postData = JSON.stringify({'url': 'http://ww2.sinaimg.cn/large/' + pid});
-					console.log(postData);
-					$.ajax({
-						type: 'POST',
-						url: 'save.php',
-						data: postData,
-						dataType: 'json',
-						success: function (json) {
-							alert(json.msg);
-						}
-					});
-				}, function () {
-					alert('上传文件出错了！');
-				}, function (progress) {
-					$('#progress')[0].innerHTML = progress * 100 + '%';
-				})
-			}
-		});
-	</script>
+			UP(picfile, function (pid) {
+				// $('#pictures')[0].innerHTML += '<img src="' + 'http://ww2.sinaimg.cn/large/' + pid +'">';
+				// $('#info')[0].innerHTML += 'http://ww2.sinaimg.cn/large/' + pid + '<br />';
+				// $('#info')[0].innerHTML=$('#pics')[0].src='http://ww2.sinaimg.cn/large/'+pid;
+				// var postData = JSON.stringify({'url': 'http://ww2.sinaimg.cn/large/' + pid});
+				var postData = JSON.stringify({'pid': pid});
+				// console.log(postData);
+				$.ajax({
+					type: 'POST',
+					url: 'admin/save.php',
+					data: postData,
+					dataType: 'json',
+					success: function (json) {
+						alert(JSON.stringify(json));
+					}
+				});
+			}, function () {
+				alert('上传文件出错了！');
+			}, function (progress) {
+				$('#progress' + this.temp).html(parseInt(progress * 100) + '%');
+			})
+		}
+	});
+})
+</script>
 
 </body>
 </html>

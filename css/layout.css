@@ -1,0 +1,29 @@
+/*img{
+    max-width: 80%;
+    display: block;
+}*/
+* {
+   margin: 0;
+   padding: 0;
+}
+
+.wrap {
+    position: relative;
+}
+#main {
+    padding: 15px 0 0 15px;
+}
+.box {
+    padding:10px 0 0 15px;
+    float: left;
+}
+.pic {
+    padding: 10px;
+    box-shadow: 0 0 6px #ccc;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.pic img {
+    width: 150px;
+    height: auto;
+}
