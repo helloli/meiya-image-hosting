@@ -7,7 +7,6 @@
 </head>
 <body>
 <!-- 布局部分 -->
-<!-- header -->
 <div class="jumbotron">
 	<div class="container">
 		<h1>欢迎来到美丫图床</h1>
@@ -62,11 +61,9 @@ $(function () {
 
 		for (var i = 0, len = this.files.length; i < len; i ++) {
 			var node = '<div class="box" id="box'
-			+ i + '"><div class="pic" id="progress'
-			+ i + '">0%</div></div>';
+			+ i + '"><div class="pic progress">0%</div></div>';
 			$('#main').prepend(node);
 		}
-
 		for (var i = 0, len = this.files.length; i < len; i ++) {
 			// console.log(len, 'len');
 			// console.log(i, 'i');
@@ -95,7 +92,7 @@ $(function () {
 			}, function () {
 				alert('上传文件出错了！');
 			}, function (progress) {
-				$('#progress' + this.temp).html(parseInt(progress * 100) + '%');
+				$('.progress').last().html(parseInt(progress * 100) + '%');
 			})
 		}
 	});
