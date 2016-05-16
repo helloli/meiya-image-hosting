@@ -1,12 +1,7 @@
-/*img{
-    max-width: 80%;
-    display: block;
-}*/
 * {
    margin: 0;
    padding: 0;
 }
-
 .wrap {
     position: relative;
 }
@@ -26,4 +21,9 @@
 .pic img {
     width: 150px;
     height: auto;
+}
+.inputDiv {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }

@@ -10,6 +10,6 @@
         $json["data"] = $data;
         echo json_encode($json, JSON_UNESCAPED_UNICODE);
     } else {
-        echo '{"status":0,"msg":"获取数据失败"}';
+        echo '{"status":0,"msg":"未查询到数据"}';
     }
 ?>

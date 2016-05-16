@@ -18,11 +18,9 @@
 	<div id="main"></div>
 </div>
 
-<input type="file" multiple="true" id="uploads">
-<div id="pictures"></div>
-<img id="pics">
-<p id="info"></p>
-<p id="progress"></p>
+<div class="inputDiv">
+	<input type="file" multiple="true" id="uploads">
+</div>
 
 <!-- js代码部分 -->
 <script src="js/jquery.min.js"></script>
@@ -32,6 +30,8 @@
 <script src="js/waterfall.js"></script>
 <script>
 $(function () {
+
+	// 页面图片数据初始化
 	$.ajax({
 		type: 'GET',
 		url: 'admin/getPics.php',
@@ -45,41 +45,46 @@ $(function () {
 					+ obj.pid
 					+ '" /></div></div>'
 				});
-				// console.log(content);
 				$('#main').html(content);
 				waterfall('main', 'box');
 			} else {
-				alert(json.msg);
+				$('#main').html('还木有图片哟~');
 			}
 		}
 	});
+
+	// 开启所有图片懒加载
 	$('img').lazyload();
+
+	// 监测上传框数据变化，有则执行上传图片处理
 	$('#uploads').change(function () {
+
+		// 如果上传框里没有数据则返回
 		if (!this.files || !this.files[0]) {
 			return alert('选取文件出错！');
 		}
 
+		// 上传了多少张图片就在main里添加多少个空的div
 		for (var i = 0, len = this.files.length; i < len; i ++) {
 			var node = '<div class="box" id="box'
 			+ i + '"><div class="pic progress">0%</div></div>';
 			$('#main').prepend(node);
 		}
+
+		// 对所有图片进行依次上传
 		for (var i = 0, len = this.files.length; i < len; i ++) {
-			// console.log(len, 'len');
-			// console.log(i, 'i');
 			var picfile = this.files[i];
 
+			// 监测上传的文件是不是图片
 			if (picfile.type.indexOf('image') != 0) {
 				return alert('这不是一个图像呀！');
 			}
 
-			UP(picfile, function (pid) {
-				// $('#pictures')[0].innerHTML += '<img src="' + 'http://ww2.sinaimg.cn/large/' + pid +'">';
-				// $('#info')[0].innerHTML += 'http://ww2.sinaimg.cn/large/' + pid + '<br />';
-				// $('#info')[0].innerHTML=$('#pics')[0].src='http://ww2.sinaimg.cn/large/'+pid;
-				// var postData = JSON.stringify({'url': 'http://ww2.sinaimg.cn/large/' + pid});
+			// 将图片上传到微博服务器，并返回图片唯一的pid
+			upPic(picfile, function (pid) {
 				var postData = JSON.stringify({'pid': pid});
-				// console.log(postData);
+
+				// 将返回的pid存储到数据库
 				$.ajax({
 					type: 'POST',
 					url: 'admin/save.php',
