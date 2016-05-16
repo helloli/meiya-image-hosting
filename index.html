@@ -91,13 +91,27 @@ $(function () {
 					data: postData,
 					dataType: 'json',
 					success: function (json) {
-						alert(JSON.stringify(json));
+						// alert(JSON.stringify(json));
+						$('.progress').last().html('<img src="http://ww2.sinaimg.cn/large/'
+							+ pid
+							+ '" /></div</div>')
+						.removeClass('progress')
+						.parent()
+						.attr('id', json.data[0].id);
 					}
 				});
 			}, function () {
 				alert('上传文件出错了！');
 			}, function (progress) {
 				$('.progress').last().html(parseInt(progress * 100) + '%');
+
+				// '<div class="box" id="box'
+				// + i + '"><div class="pic progress">0%</div></div>';
+
+				// '<div class="box" id="'
+				// 	+ obj.id +'"><div class="pic"><img src="http://ww2.sinaimg.cn/large/'
+				// 	+ obj.pid
+				// 	+ '" /></div></div>'
 			})
 		}
 	});
