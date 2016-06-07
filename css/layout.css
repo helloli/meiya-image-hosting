@@ -5,7 +5,7 @@
 .wrap {
     position: relative;
 }
-#main {
+/*#main {
     padding: 15px 0 0 15px;
 }
 .box {
@@ -21,9 +21,43 @@
 .pic img {
     width: 150px;
     height: auto;
-}
+}*/
 .inputDiv {
     position: absolute;
     top: 5px;
     right: 5px;
+}
+#main{
+    position: relative;
+    height: 100%;
+}
+.pin{
+    padding: 15px 0 0 15px;
+    float:left;
+    position: absolute;
+}
+.box{
+    padding: 10px;
+    border:1px solid #ccc;
+    box-shadow: 0 0 6px #ccc;
+    border-radius: 5px;
+}
+.box img{
+    width:162px;
+    height:auto;
+}
+
+.picbox {
+    padding:10px 0 0 15px;
+    float: left;
+}
+.pic {
+    padding: 10px;
+    box-shadow: 0 0 6px #ccc;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.pic img {
+    width: 150px;
+    height: auto;
 }

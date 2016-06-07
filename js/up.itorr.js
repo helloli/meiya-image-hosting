@@ -8,7 +8,7 @@ var upPic = function (o, success, error, upload, x, file, A) {
 			return console.log('并没有传入需要上传的文件');
 		}
 
-		if (A=o.success) {
+		if (A = o.success) {
 			success = A;
 		}
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传</title>
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+
+<div class="wrap">
+    <div id="main"></div>
+</div>
+
+<div class="inputDiv">
+    <input type="file" multiple="true" id="uploads">
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/up.itorr.js"></script>
+<script>
+    // 监测上传框数据变化，有则执行上传图片处理
+    $('#uploads').change(function () {
+
+        // 如果上传框里没有数据则返回
+        if (!this.files || !this.files[0]) {
+            return alert('选取文件出错！');
+        }
+
+        // 上传了多少张图片就在main里添加多少个空的div
+        for (var i = 0, len = this.files.length; i < len; i ++) {
+            var node = '<div class="picbox" id="box'
+            + i + '"><div class="pic progress">0%</div></div>';
+            $('#main').prepend(node);
+        }
+
+        // 对所有图片进行依次上传
+        for (var i = 0, len = this.files.length; i < len; i ++) {
+            var picfile = this.files[i];
+
+            // 监测上传的文件是不是图片
+            if (picfile.type.indexOf('image') != 0) {
+                return alert('这不是一个图像呀！');
+            }
+
+            // 将图片上传到微博服务器，并返回图片唯一的pid
+            upPic(picfile, function (pid) {
+                var postData = JSON.stringify({'pid': pid});
+
+                // 将返回的pid存储到数据库
+                $.ajax({
+                    type: 'POST',
+                    url: 'admin/save.php',
+                    data: postData,
+                    dataType: 'json',
+                    success: function (json) {
+                        $('.progress').last().html('<img src="http://ww2.sinaimg.cn/large/'
+                            + pid
+                            + '" /></div</div>')
+                        .removeClass('progress')
+                        .parent()
+                        .attr('id', json.data[0].id);
+                    }
+                });
+            }, function () {
+                alert('上传文件出错了！');
+            }, function (progress) {
+                $('.progress').last().html(parseInt(progress * 100) + '%');
+            })
+        }
+    });
+</script>
+</body>
+</html>
