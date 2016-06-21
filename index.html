@@ -42,7 +42,21 @@ $(function () {
 					+ '" /></div></div>'
 				});
 				$('#main').html(content);
-				waterfall();
+				// waterfall();
+
+		        var imgs = document.getElementsByTagName('img');
+		        for (var i = 0, len = imgs.length; i < len; i ++ ) {
+		        	(function(n){
+			        	imgs[n].onload = function () {
+				            if (imgs[n].clientWidth >= imgs[n].clientHeight) {
+				                imgs[n].style.width = '100%';
+				            } else {
+				                imgs[n].style.height = '100%';
+				            }
+			        	};
+			        })(i);
+		        }
+
 			} else {
 				$('#main').html('还木有图片哟~');
 			}

@@ -34,17 +34,22 @@
 .pin{
     padding: 15px 0 0 15px;
     float:left;
-    position: absolute;
+    /*position: absolute;*/
 }
 .box{
+    width:162px;
+    height:162px;
     padding: 10px;
     border:1px solid #ccc;
     box-shadow: 0 0 6px #ccc;
     border-radius: 5px;
+            position: relative;
 }
 .box img{
-    width:162px;
-    height:auto;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
 }
 
 .picbox {
