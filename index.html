@@ -14,9 +14,7 @@
 		<!-- <p><a class="btn btn-primary btn-lg" role="button">广告君的地盘</a></p> -->
 	</div>
 </div>
-<div class="wrap">
-	<div id="main"></div>
-</div>
+<div id="main"></div>
 
 
 <!-- js代码部分 -->
@@ -33,17 +31,18 @@ $(function () {
 		url: 'admin/getPics.php',
 		dataType: 'json',
 		success: function (json) {
+			// json = {"status":1,"data":[{"id":"128","pid":"a15b4afegw1f48mxz7374j20qo0zkn6q"}]};
 			if(json.status) {
 				var content = '';
 				json.data.forEach(function (obj) {
 					content += '<div class="pin" id="'
+					// + obj.id +'"><div class="box"><img src="css/loading.gif" data-original="http://ww2.sinaimg.cn/large/'
 					+ obj.id +'"><div class="box"><img src="http://ww2.sinaimg.cn/large/'
 					+ obj.pid
 					+ '" /></div></div>'
 				});
 				$('#main').html(content);
 				// waterfall();
-
 		        var imgs = document.getElementsByTagName('img');
 		        for (var i = 0, len = imgs.length; i < len; i ++ ) {
 		        	(function(n){
@@ -53,12 +52,13 @@ $(function () {
 				            } else {
 				                imgs[n].style.height = '100%';
 				            }
-				            console.log(imgs[n].parentElement);
-				            imgs[n].parentElement.style.background = 'none';
+				            // imgs[n].parentElement.style.background = 'none';
 				            imgs[n].style.visibility = 'visible';
 			        	};
 			        })(i);
 		        }
+	// 开启所有图片懒加载
+	// $('img').lazyload({ threshold : 200 });
 
 			} else {
 				$('#main').html('还木有图片哟~');
@@ -66,8 +66,7 @@ $(function () {
 		}
 	});
 
-	// 开启所有图片懒加载
-	$('img').lazyload();
+
 
 
 })
