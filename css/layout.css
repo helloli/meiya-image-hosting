@@ -5,23 +5,6 @@
 .wrap {
     position: relative;
 }
-/*#main {
-    padding: 15px 0 0 15px;
-}
-.box {
-    padding:10px 0 0 15px;
-    float: left;
-}
-.pic {
-    padding: 10px;
-    box-shadow: 0 0 6px #ccc;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-.pic img {
-    width: 150px;
-    height: auto;
-}*/
 .inputDiv {
     position: absolute;
     top: 5px;
@@ -34,7 +17,6 @@
 .pin{
     padding: 15px 0 0 15px;
     float:left;
-    /*position: absolute;*/
 }
 .box{
     width:162px;
@@ -43,13 +25,16 @@
     border:1px solid #ccc;
     box-shadow: 0 0 6px #ccc;
     border-radius: 5px;
-            position: relative;
+    position: relative;
+    background: url(loading.gif) no-repeat center;
+    overflow: hidden;
 }
 .box img{
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
 }
 
 .picbox {

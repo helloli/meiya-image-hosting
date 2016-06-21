@@ -23,7 +23,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.lazyload.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/waterfall.js"></script>
+<!-- <script src="js/waterfall.js"></script> -->
 <script>
 $(function () {
 
@@ -53,6 +53,9 @@ $(function () {
 				            } else {
 				                imgs[n].style.height = '100%';
 				            }
+				            console.log(imgs[n].parentElement);
+				            imgs[n].parentElement.style.background = 'none';
+				            imgs[n].style.visibility = 'visible';
 			        	};
 			        })(i);
 		        }
