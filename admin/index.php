@@ -66,7 +66,8 @@
         keyboard: false
     });
     $('button').click(function () {
-
+        $('#msg').hide();
+        $('#submit').html('登录中...');
         $.ajax({
             type: 'POST',
             url: 'login.php',
@@ -74,6 +75,7 @@
             dataType: 'json',
             success: function (json) {
                 if (json.msg) {
+                    $('#submit').html('登录');
                     $('#msg').show();
                     $('#name').focus();
                 } else {
