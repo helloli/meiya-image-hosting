@@ -22,7 +22,7 @@
     box-shadow: 0 0 6px #ccc;
     border-radius: 5px;
     position: relative;
-    background: url(loading.gif) no-repeat center;
+    /*background: url(loading.gif) no-repeat center;*/
     overflow: hidden;
 }
 .box img{

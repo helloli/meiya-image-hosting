@@ -36,8 +36,8 @@ $(function () {
 				var content = '';
 				json.data.forEach(function (obj) {
 					content += '<div class="pin" id="'
-					// + obj.id +'"><div class="box"><img src="css/loading.gif" data-original="http://ww2.sinaimg.cn/large/'
-					+ obj.id +'"><div class="box"><img src="http://ww2.sinaimg.cn/large/'
+					+ obj.id +'"><div class="box"><img src="css/loading.gif" data-original="http://ww2.sinaimg.cn/large/'
+					// + obj.id +'"><div class="box"><img src="http://ww2.sinaimg.cn/large/'
 					+ obj.pid
 					+ '" /></div></div>'
 				});
@@ -47,7 +47,7 @@ $(function () {
 		        for (var i = 0, len = imgs.length; i < len; i ++ ) {
 		        	(function(n){
 			        	imgs[n].onload = function () {
-				            if (imgs[n].clientWidth >= imgs[n].clientHeight) {
+				            if (imgs[n].clientWidth > imgs[n].clientHeight) {
 				                imgs[n].style.width = '100%';
 				            } else {
 				                imgs[n].style.height = '100%';
@@ -58,7 +58,7 @@ $(function () {
 			        })(i);
 		        }
 	// 开启所有图片懒加载
-	// $('img').lazyload({ threshold : 200 });
+	$('img').lazyload({ threshold : 200 });
 
 			} else {
 				$('#main').html('还木有图片哟~');
