@@ -51,8 +51,11 @@
             <!-- <button type="button" class="btn btn-default" 
                data-dismiss="modal">关闭
             </button> -->
-            <button id="submit" type="button" class="btn btn-primary">
-               登录
+            <button id="back" type="button" class="btn btn-primary" >
+                返回
+            </button>
+            <button id="submit" type="button" class="btn btn-warning">
+                登录
             </button>
          </div>
       </div><!-- /.modal-content -->
@@ -65,7 +68,10 @@
         backdrop: 'static',
         keyboard: false
     });
-    $('button').click(function () {
+    $('#back').click(function () {
+        window.location.href = '../';
+    });
+    $('#submit').click(function () {
         $('#msg').hide();
         $('#submit').html('登录中...');
         $.ajax({
