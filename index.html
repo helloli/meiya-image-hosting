@@ -14,7 +14,7 @@
 		<!-- <p><a class="btn btn-primary btn-lg" role="button">广告君的地盘</a></p> -->
 	</div>
 </div>
-<div id="main"></div>
+<div id="main"><img src="css/loading1.gif" alt="loading"></div>
 
 
 <!-- js代码部分 -->
@@ -59,8 +59,9 @@ $(function () {
 			        	};
 			        })(i);
 		        }
-	// 开启所有图片懒加载
-	$('img').lazyload({ threshold : 200 });
+
+				// 开启所有图片懒加载
+				$('img').lazyload({ threshold : 200 });
 
 			} else {
 				$('#main').html('还木有图片哟~');
