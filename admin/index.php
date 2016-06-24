@@ -25,41 +25,40 @@
 <!-- 模态框（Modal） -->
 <div class="modal" style="background-color: #ccc" id="myModal" tabindex="-1" role="dialog" 
    aria-labelledby="myModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <!-- <button type="button" class="close" 
-               data-dismiss="modal" aria-hidden="true">
-                  &times;
-            </button> -->
-            <h4 class="modal-title" id="myModalLabel">
-               请登录
-            </h4>
-         </div>
-         <div class="modal-body">
-           <div class="form-group">
-              <input type="text" class="form-control" id="name" 
-                 placeholder="用户名">
-           </div>
-           <div class="form-group">
-              <input type="password" class="form-control" id="password" 
-                 placeholder="密码">
-           </div>
-         </div>
-         <div class="modal-footer">
-            <span id="msg" style="float:left;color:red;">*用户名或密码错误</span>
-            <!-- <button type="button" class="btn btn-default" 
-               data-dismiss="modal">关闭
-            </button> -->
-            <button id="back" type="button" class="btn btn-primary" >
-                返回
-            </button>
-            <button id="submit" type="button" class="btn btn-warning">
-                登录
-            </button>
-         </div>
-      </div><!-- /.modal-content -->
-</div><!-- /.modal -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" 
+                   data-dismiss="modal" aria-hidden="true">
+                      &times;
+                </button> -->
+                <h4 class="modal-title" id="myModalLabel">
+                   请登录
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" placeholder="用户名">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" placeholder="密码">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span id="msg" style="float:left;color:red;">*用户名或密码错误</span>
+                <!-- <button type="button" class="btn btn-default" 
+                   data-dismiss="modal">关闭
+                </button> -->
+                <button id="back" type="button" class="btn btn-primary" >
+                    返回
+                </button>
+                <button id="submit" type="button" class="btn btn-warning">
+                    登录
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $('#msg').hide();
     $('#name').focus();
