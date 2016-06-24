@@ -8,11 +8,11 @@
 <body>
 <!-- 布局部分 -->
 <div class="jumbotron">
-	<div class="container">
-		<h1>欢迎来到美丫图床</h1>
-		<p>美丫图床为大家带来各种炫酷的表情哦</p>
-		<!-- <p><a class="btn btn-primary btn-lg" role="button">广告君的地盘</a></p> -->
-	</div>
+    <div class="container">
+        <h1>欢迎来到美丫图床</h1>
+        <p>美丫图床为大家带来各种炫酷的表情哦</p>
+        <!-- <p><a class="btn btn-primary btn-lg" role="button">广告君的地盘</a></p> -->
+    </div>
 </div>
 <div id="main"><img src="css/loading1.gif" alt="loading"></div>
 
@@ -25,49 +25,49 @@
 <script>
 $(function () {
 
-	// 页面图片数据初始化
-	$.ajax({
-		type: 'GET',
-		url: 'admin/getPics.php',
-		dataType: 'json',
-		success: function (json) {
-			// json = {"status":1,"data":[{"id":"128","pid":"a15b4afegw1f53y4hkn1sj20sg0lch6i"}]};
-			if(json.status) {
-				var content = '';
-				json.data.forEach(function (obj) {
-					content += '<div class="pin" id="'
-					+ obj.id +'"><div class="box"><img src="css/loading.gif" data-original="http://ww2.sinaimg.cn/large/'
-					// + obj.id +'"><div class="box"><img src="http://ww2.sinaimg.cn/large/'
-					+ obj.pid
-					+ '" /></div></div>'
-				});
-				$('#main').html(content);
-				// waterfall();
-		        var imgs = document.getElementsByTagName('img');
-		        for (var i = 0, len = imgs.length; i < len; i ++ ) {
-		        	(function(n){
-			        	imgs[n].onload = function () {
-				            if (imgs[n].clientWidth > imgs[n].clientHeight) {
-				                imgs[n].style.width = '100%';
-				                imgs[n].style.height = '';
-				            } else {
-				                imgs[n].style.width = '';
-				                imgs[n].style.height = '100%';
-				            }
-				            // imgs[n].parentElement.style.background = 'none';
-				            imgs[n].style.visibility = 'visible';
-			        	};
-			        })(i);
-		        }
+    // 页面图片数据初始化
+    $.ajax({
+        type: 'GET',
+        url: 'admin/getPics.php',
+        dataType: 'json',
+        success: function (json) {
+            // json = {"status":1,"data":[{"id":"128","pid":"a15b4afegw1f53y4hkn1sj20sg0lch6i"}]};
+            if(json.status) {
+                var content = '';
+                json.data.forEach(function (obj) {
+                    content += '<div class="pin" id="'
+                    + obj.id +'"><div class="box"><img src="css/loading.gif" data-original="http://ww2.sinaimg.cn/large/'
+                    // + obj.id +'"><div class="box"><img src="http://ww2.sinaimg.cn/large/'
+                    + obj.pid
+                    + '" /></div></div>'
+                });
+                $('#main').html(content);
+                // waterfall();
+                var imgs = document.getElementsByTagName('img');
+                for (var i = 0, len = imgs.length; i < len; i ++ ) {
+                    (function(n){
+                        imgs[n].onload = function () {
+                            if (imgs[n].clientWidth > imgs[n].clientHeight) {
+                                imgs[n].style.width = '100%';
+                                imgs[n].style.height = '';
+                            } else {
+                                imgs[n].style.width = '';
+                                imgs[n].style.height = '100%';
+                            }
+                            // imgs[n].parentElement.style.background = 'none';
+                            imgs[n].style.visibility = 'visible';
+                        };
+                    })(i);
+                }
 
-				// 开启所有图片懒加载
-				$('img').lazyload({ threshold : 200 });
+                // 开启所有图片懒加载
+                $('img').lazyload({ threshold : 200 });
 
-			} else {
-				$('#main').html('还木有图片哟~');
-			}
-		}
-	});
+            } else {
+                $('#main').html('还木有图片哟~');
+            }
+        }
+    });
 
 
 
